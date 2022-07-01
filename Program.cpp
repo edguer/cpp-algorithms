@@ -1,22 +1,27 @@
-// #include "Structures/GraphList.hpp"
-#include "Structures/GraphMatrix.hpp"
-// #include "Structures/Heap.hpp"
-// #include "Algorithms/BitOperations.hpp"
-//#include "Algorithms/Dijkstras.hpp"
+#include "Structures/LinkedListQueue.hpp"
 
 using namespace std;
 
 
 int main()
 {
-    GraphMatrix matrix;
-    matrix.AddEdge(18, 19, 1);
-    // matrix.PrintRoutes(1, 2);
-    int *paths = matrix.GetShortestPaths(18);
-    cout << " ---- " << endl;
-    for (int i = 0; i < matrix.GetVertices(); i++)
+    LinkedQueue q;
+    int a = 1, b = 2;
+    q.Enqueue(&a);
+    q.Enqueue(&b);
+
+    void* last_item = 0;
+    do
     {
-        if (paths[i] > 0 && paths[i] < INT_MAX)
-            cout << i << ": " << paths[i] << endl;
-    }
+        last_item = q.Dequeue();
+        if (last_item == 0)
+        {
+            break;
+        }
+
+        int int_item = *(int*)last_item;
+        cout << "Item dequeued: " << int_item << std::endl;
+    } while (last_item != 0);
+
+    return 0;
 }

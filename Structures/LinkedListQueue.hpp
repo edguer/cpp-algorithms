@@ -9,9 +9,9 @@ struct Node
 {
     Node *next;
     Node *previous;
-    int value;
+    void* value;
 
-    Node(int data)
+    Node(void* data)
     {
         value = data;
     }
@@ -27,7 +27,7 @@ struct LinkedQueue
         front = rear = NULL;
     }
 
-    void Enqueue(int data)
+    void Enqueue(void* data)
     {
         Node *node = new Node(data);
         if (front == NULL && rear == NULL)
@@ -44,7 +44,7 @@ struct LinkedQueue
         }
     }
 
-    int Dequeue()
+    void* Dequeue()
     {
         if (front == NULL)
         {
@@ -53,7 +53,7 @@ struct LinkedQueue
         }
         else
         {
-            int ret = front->value;
+            void* ret = front->value;
             front = front->next;
             return ret;
         }
