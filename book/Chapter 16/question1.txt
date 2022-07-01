@@ -1,0 +1,2 @@
+A process defines a memory space for an executable program. Threads live inside it, sharing the same memory address space, and they represent execution flows, meaning that a process must ahve at least one thread.
+One process cannot access other`s adress space, but threads can see one another's memory. For inter-process communication, one must use strategies such as pipes, sockets or files.

@@ -1,0 +1,11 @@
+It all depends on what hardware resources we have, but let's first assume we are not limited by memory. Doing a look on all visited urls won't work out, since we will need to iterate through all the visited ones every time, and keeping an in-order array is costly. So a good alternative would be hashing the URLs and storing them in a hash table, which would give as a quicker access to the URL. Example: url domain.com/abc would hash to 4572. This hash code might correlate to a number of other URLs, but then we only have to iterate through the URLs collided on that hash code, much less than iterate all visited URLs.
+If we would have a more or less evenly distributed set of URLs through domains and paths, we could be a trie based on the URL parts, like:
+      domain.com
+      /       \
+    path1/  path2/
+   /
+subpath1
+This will deeply reduce the search time, but again, it depends on how the URLs might distributed. For example, if we have millions of URLs pointing to the same path, but with different querystring parameters, then a trie won't be worthwhile.
+
+Both hash table and trie solutions might be distributed in different machines, depending on the amount of RAM we have per server. One way of doing it is the traditional sharding approach per, let`s say, hash code range or domain names. As that many URL might take a lot of memory space, we should consider holding the data in disk.
+We could have a file per hash code, and load all the hash codes in memory, to make the look up faster. As soon as we find the hash code in memory, we open the file to iterate through the URLs
